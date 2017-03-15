@@ -1,0 +1,24 @@
+{
+  "l3vpn:l3vpn": {
+    "name": "Telstra",
+    "route-distinguisher": 635,
+    "endpoint": [
+      {
+        "id": "HQ",
+        "ce-device": "ce2",
+        "ce-interface": "GigabitEthernet0/1",
+        "ip-network": "11.11.1.0/24",
+        "bandwidth": 900000,
+        "as-number": 65201
+      },
+      {
+        "id": "SVT",
+        "ce-device": "ce3",
+        "ce-interface": "GigabitEthernet0/1",
+        "ip-network": "11.11.2.0/24",
+        "bandwidth": 300000,
+        "as-number": 65202
+      }
+    ]
+  }
+}
