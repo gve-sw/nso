@@ -75,7 +75,7 @@ def main():
     print(data)
 
     with open('createVPN.json', 'w') as outfile:
-        json.dump(data, outfile)
+        json.dump(data, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
 
     payload = open('createVPN.json', 'rb').read()
     response = requests.request("POST", url, data=payload, headers=headers, auth=(user, password))
