@@ -11,34 +11,57 @@
 
 <form action="/action_page.php" method="post">
 
-    Route Distinguisher:<br>
-  <input type="text" name="Route Distinguisher"><br>
-    Source ID:<br>
+    Route Distinguisher:
+  <select name="Route Distinguisher">
+    <option value="100">100</option>
+    <option value="200">200</option>
+    <option value="300">300</option>
+  </select><br>
+    Source ID:
   <input type="text" name="Source ID"><br>
-    Source CE Device:<br>
-  <input type="text" name="Source CE Device"><br>
-    Source CE Interface:<br>
-  <input type="text" name="Source CE Interface"><br>
-    Source Network:<br>
-  <input type="text" name="Source Network"><br>
-    Source Bandwidth:<br>
-  <input type="text" name="Source Bandwidth"><br>
-    Source AS Number:<br>
-  <input type="text" name="Source AS Number"><br>
+    Source CE Device:
+  <select name="Source Device">
+    <option value="ce2">ce2</option>
+  </select><br>
+    Source CE Interface:<
+  <select name="Source Interface">
+    <option value="GigabitEthernet0/1">GigabitEthernet0/1</option>
+  </select><br>
+    Source Network:
+  <select name="Source Network">
+    <option value="11.11.1.0/24">11.11.1.0/24</option>
+  </select><br>
+    Source Bandwidth:
+  <select name="Source Bandwidth">
+    <option value="900000">900000</option>
+  </select><br>
+    Source AS Number:
+  <select name="Source AS Number">
+    <option value="65201">65201</option>
+  </select><br>
 
-    Destination ID:<br>
+    Destination ID:
   <input type="text" name="Destination ID"><br>
-    Destination CE Device:<br>
-  <input type="text" name="Destination CE Device"><br>
-    Destination CE Interface:<br>
-  <input type="text" name="Destination CE Interface"><br>
-    Destination Network:<br>
-  <input type="text" name="Destination Network"><br>
-    Destination Bandwidth:<br>
-  <input type="text" name="Destination Bandwidth"><br>
-    Destination AS Number:<br>
-  <input type="text" name="Destination AS Number"><br>
-    <br>
+    Destination CE Device:
+  <select name="Destination Device"><br>
+    <option value="ce3">ce3</option><br>
+  </select><br>
+    Destination CE Interface:
+  <select name="Destination Interface">
+    <option value="GigabitEthernet0/1">GigabitEthernet0/1</option>
+  </select><br>
+    Destination Network:
+  <select name="Destination Network">
+    <option value="11.11.2.0/24">11.11.2.0/24</option>
+  </select><br>
+    Destination Bandwidth:
+  <select name="Destination Bandwidth">
+    <option value="300000">300000</option>
+  </select><br>
+    Destination AS Number:
+  <select name="Destination AS Number">
+    <option value="65202">65202</option>
+  </select><br>
 
     <input type="submit" value="Submit">
 
