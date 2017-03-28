@@ -1,6 +1,5 @@
 from Wrapper_API import Wrapper_API
 
-#### This code is under development - UNFINISHED
 
 host = '198.18.134.28:8080'
 username = 'admin'
