@@ -1,0 +1,46 @@
+﻿/*=============================================================
+    Authour URI: www.binarytheme.com
+    License: Commons Attribution 3.0
+
+    http://creativecommons.org/licenses/by/3.0/
+
+    100% Free To use For Personal And Commercial Use.
+    IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
+   
+    ========================================================  */
+
+.head-glow {
+  background-color:rgba(0, 0, 0, 0.8);
+}
+/* =============================================================
+  HOME SECTION STYLES
+ ============================================================ */
+
+
+    #home-sec .overlay {
+        background-color: rgba(44, 46, 53, 0.75);
+    }
+
+
+.btn-home {
+    background-color: rgba(66, 168, 255, 0.8);
+}
+
+
+
+/* =============================================================
+  JUST SECTION STYLES 
+ ============================================================ */
+    #just-sec .overlay {
+        background: rgba(33, 34, 37, 0.95);
+    }
+
+
+/*==========================================
+   LOCATION STYLES
+    =====================================================*/
+#location-sec {
+    background-color: rgba(50, 51, 58, 1);
+}
+
+   
