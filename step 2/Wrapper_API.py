@@ -26,6 +26,8 @@
 #           For Cisco partners, open a case at www.cisco.com/go/ph
 
 import requests
+import json
+from collections import OrderedDict
 
 host = '198.18.134.28:8080'
 username = 'admin'
