@@ -8,7 +8,7 @@ def main():
     return render_template('index-dark.html')
 
 
-@app.route("/")
+@app.route("/L3VpnDeploy")
 def L3VpnDeploy():
     return render_template('L3VpnDeploy.html')
 
