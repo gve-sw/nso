@@ -2,8 +2,8 @@ from Wrapper_API import Wrapper_API
 
 #### This code is under development - UNFINISHED
 
-url = "http://198.18.134.28:8080/api/running/vpn"
-user = 'admin'
+host = '198.18.134.28:8080'
+username = 'admin'
 password = 'admin'
 headers = {
         'content-type': "application/vnd.yang.data+json",
@@ -26,7 +26,7 @@ def main():
     print("This tool uses the northbound NSO API to deploy L3VPNs")
     print()
 
-    api = Wrapper_API()
+    api = Wrapper_API(host, username, password)
     vpn = api.createVPN()
 
 

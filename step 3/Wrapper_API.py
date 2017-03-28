@@ -27,18 +27,13 @@
 
 import requests
 import json
-import requests
 from collections import OrderedDict
-
-host = '198.18.134.28:8080'
-username = 'admin'
-password = 'admin'
 
 class Wrapper_API(object):
     """
     This class is used to interact with the NSO API
     """
-    def __init__(self):
+    def __init__(self, host, username, password):
         self.host = host
         self.username = username
         self.password = password
