@@ -21,10 +21,11 @@
     }
 </style>
 
-<br action="/action_page.php" method="post">
+<br>
+<form onsubmit="return make_json(this);">
 
     Route Distinguisher:
-  <select name="Route Distinguisher">
+  <select name="route_distinguisher">
       <option label=" "></option>
       <option value="100">100</option>
       <option value="200">200</option>
@@ -33,32 +34,32 @@
     <br>
     <br>
     Source ID:
-  <input type="text" name="Source ID">
+  <input type="text" name="Source_ID">
     <br>
     <br>
     Source CE Device:
-  <select name="Source Device">
+  <select name="Source_Device">
       <option label=" "></option>
     <option value="ce2">ce2</option>
   </select>
     <br>
     <br>
     Source CE Interface:
-  <select name="Source Interface">
+  <select name="Source_Interface">
       <option label=" "></option>
     <option value="GigabitEthernet0/1">GigabitEthernet0/1</option>
   </select>
     <br>
     <br>
     Source Network:
-  <select name="Source Network">
+  <select name="Source_Network">
       <option label=" "></option>
     <option value="11.11.1.0/24">11.11.1.0/24</option>
   </select>
     <br>
     <br>
     Source Bandwidth:
-  <select name="Source Bandwidth">
+  <select name="Source_Bandwidth">
       <option label=" "></option>
     <option value="1000">1000</option>
       <option value="100">100</option>
@@ -66,7 +67,7 @@
     <br>
     <br>
     Source AS Number:
-  <select name="Source AS Number">
+  <select name="Source_AS_Number">
       <option label=" "></option>
     <option value="65201">65201</option>
   </select>
@@ -77,32 +78,32 @@
     <br>
     <br>
     <font color="white">Destination ID:</font>
-  <input type="text" name="Destination ID">
+  <input type="text" name="Destination_ID">
     <br>
     <br>
-    <font color="white">Destination CE Device:</font>
-  <select name="Destination Device">
+    <font color="white">Destination CE_Device:</font>
+  <select name="Destination_Device">
       <option label=" "></option>
     <option value="ce3">ce3</option>
   </select>
     <br>
     <br>
     <font color="white">Destination CE Interface:</font>
-  <select name="Destination Interface">
+  <select name="Destination_Interface">
       <option label=" "></option>
     <option value="GigabitEthernet0/1">GigabitEthernet0/1</option>
   </select>
     <br>
     <br>
     <font color="white">Destination Network:</font>
-  <select name="Destination Network">
+  <select name="Destination_Network">
       <option label=" "></option>
     <option value="11.11.2.0/24">11.11.2.0/24</option>
   </select>
     <br>
     <br>
     <font color="white">Destination Bandwidth:</font>
-  <select name="Destination Bandwidth">
+  <select name="Destination_Bandwidth">
       <option label=" "></option>
     <option value="1000">1000</option>
       <option value="100">100</option>
@@ -110,7 +111,7 @@
     <br>
     <br>
     <font color="white">Destination AS Number:</font>
-  <select name="Destination AS Number">
+  <select name="Destination_AS_Number">
       <option label=" "></option>
     <option value="65202">65202</option>
   </select>
@@ -118,7 +119,40 @@
     <br>
     <input type="submit" value="Submit">
 
-
 </form>
+<pre id="output"> JSON will be posted here upon clicking Submit...</pre>
 </body>
 </html>
+
+<script>
+  function make_json(form) {
+    var json =
+            {
+              "l3vpn:l3vpn": {
+                "name":'Singtel',
+                "route-distinguisher": parseInt(form.route_distinguisher.value, 10),
+                "endpoint": [
+                  {
+                    "id": form.Source_ID.value,
+                    "ce-device": form.Source_Device.value,
+                    "ce-interface": form.Source_Interface.value,
+                    "ip-network": form.Source_Network.value,
+                    "bandwidth": parseInt(form.Source_Bandwidth.value, 10),
+                    "as-number": parseInt(form.Source_AS_Number.value, 10)
+                  },
+                  {
+                    "id": form.Destination_ID.value,
+                    "ce-device": form.Destination_Device.value,
+                    "ce-interface": form.Destination_Interface.value,
+                    "ip-network": form.Destination_Network.value,
+                    "bandwidth": parseInt(form.Destination_Bandwidth.value, 10),
+                    "as-number": parseInt(form.Destination_AS_Number.value, 10)
+                  }
+                ]
+              }
+            };
+    var html = JSON.stringify(json,0,2)
+    document.getElementById('output').innerHTML=html;
+    return false;
+  }
+</script>
