@@ -75,7 +75,7 @@ def main():
     payload = open('createVPN.json', 'rb').read()
 
     apiRequest = Wrapper_API(host, username, password)
-    apiRequest.createVPN(data_formatted)
+    apiRequest.createVPN(payload)
 
     print()
     print(apiRequest.text)
