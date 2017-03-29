@@ -24,6 +24,10 @@
 <br>
 <form action="/L3VpnDeploy" method="post">
 
+    VPN Name:
+  <input type="text" name="name">
+    <br>
+    <br>
     Route Distinguisher:
   <select name="route_distinguisher">
       <option label=" "></option>
@@ -61,8 +65,8 @@
     Source Bandwidth:
   <select name="Source_Bandwidth">
       <option label=" "></option>
-    <option value="1000">1000</option>
-      <option value="100">100</option>
+    <option value="100000">100000</option>
+      <option value="110000">110000</option>
   </select>
     <br>
     <br>
@@ -105,8 +109,8 @@
     <font color="white">Destination Bandwidth:</font>
   <select name="Destination_Bandwidth">
       <option label=" "></option>
-    <option value="1000">1000</option>
-      <option value="100">100</option>
+    <option value="900000">900000</option>
+      <option value="800000">800000</option>
   </select>
     <br>
     <br>
@@ -123,36 +127,3 @@
 <pre id="output"> JSON will be posted here upon clicking Submit...</pre>
 </body>
 </html>
-
-<script>
-  function make_json(form) {
-    var json =
-            {
-              "l3vpn:l3vpn": {
-                "name":'Singtel',
-                "route-distinguisher": parseInt(form.route_distinguisher.value, 10),
-                "endpoint": [
-                  {
-                    "id": form.Source_ID.value,
-                    "ce-device": form.Source_Device.value,
-                    "ce-interface": form.Source_Interface.value,
-                    "ip-network": form.Source_Network.value,
-                    "bandwidth": parseInt(form.Source_Bandwidth.value, 10),
-                    "as-number": parseInt(form.Source_AS_Number.value, 10)
-                  },
-                  {
-                    "id": form.Destination_ID.value,
-                    "ce-device": form.Destination_Device.value,
-                    "ce-interface": form.Destination_Interface.value,
-                    "ip-network": form.Destination_Network.value,
-                    "bandwidth": parseInt(form.Destination_Bandwidth.value, 10),
-                    "as-number": parseInt(form.Destination_AS_Number.value, 10)
-                  }
-                ]
-              }
-            };
-    var html = JSON.stringify(json,0,2)
-    document.getElementById('output').innerHTML=html;
-    return false;
-  }
-</script>

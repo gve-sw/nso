@@ -48,7 +48,7 @@ def createJSON():
             ]
           }
         }
-    ''' % {'vpnName': 'CSAP_TELECOM',
+    ''' % {'vpnName': request.form['name'],
            'routeDistinguisher': request.form['route_distinguisher'],
            'sourceID': request.form['Source_ID'],
            'sourceCeDevice': request.form['Source_Device'],
