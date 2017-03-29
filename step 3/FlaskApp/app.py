@@ -4,13 +4,11 @@ from Wrapper_API import Wrapper_API
 import json
 
 host = '198.18.134.28:8080'
-user = "admin"
+username = "admin"
 password = "admin"
 
 
 app = Flask(__name__)
-wrapper = Wrapper_API('http://198.18.134.28:8080/api/running/vpn', 'admin', 'password')
-
 
 @app.route("/")
 def main():
@@ -65,14 +63,8 @@ def createJSON():
            }
 
     data_formatted = json.loads(data, object_pairs_hook=OrderedDict)
-    wrapper.createVPN(data_formatted)
-
-
-    #with open('createVPN.json', 'w') as outfile:
-    #    json.dump(data_formatted, outfile, indent=2)
-
-    #payload = open('createVPN.json', 'rb').read()
-    #print(payload)
+    apiRequest = Wrapper_API(host, username, password)
+    apiRequest.createVPN(data_formatted)
 
     return redirect('/')
 

@@ -25,109 +25,60 @@
 #           For internal Cisco gve-programmability@cisco.com
 #           For Cisco partners, open a case at www.cisco.com/go/ph
 
-import requests, json
-
-host = '198.18.134.28:8080'
-username = 'admin'
-password = 'admin'
+import requests
+import json
 
 class Wrapper_API(object):
     """
     This class is used to interact with the NSO API
     """
-    def __init__(self):
+    def __init__(self, host, username, password):
         self.host = host
         self.username = username
         self.password = password
-
-   def send_api_request(self, phrase):
-        """
-        Sends a request to the API for retrieving data.
-        """
-        url = 'http://' + host + '/api' + '/' + phrase
-        headers = {'Content-Type': 'application/vnd.yang.data+json',
-                   'Accept': 'application/vnd.yang.data+json'}
-        response = requests.get(url, auth=(username, password),
-                                headers=headers, verify=False)
-        return response.text
+        self.headers = {'Content-Type': 'application/vnd.yang.data+json',
+                        'Accept': 'application/vnd.yang.data+json'}
 
     def getDevices(self):
         """
         Retrieves a list of devices from the NSO API
         """
         devicesURL = 'running/devices'
-        apiRequest = Wrapper_API()
-        apiResponse = apiRequest.send_api_request(devicesURL)
-        return apiResponse
+        url = 'http://' + self.host + '/api' + '/' + devicesURL
+
+        response = requests.get(url, auth=(self.username, self.password),
+                                headers=self.headers, verify=False)
+        return response
 
     def getTopology(self):
         """
         Retrieves a list of devices and their relationships in a topology from the NSO API
         """
         TopologyURL = 'running/topology'
-        apiRequest = Wrapper_API()
-        apiResponse = apiRequest.send_api_request(TopologyURL)
-        return apiResponse
+
+        url = 'http://' + self.host + '/api' + '/' + TopologyURL
+
+        response = requests.get(url, auth=(self.username, self.password),
+                                headers=self.headers, verify=False)
+        return response
 
     def getSnmpConfig(self):
         """
         Retrieves SNMP config from the NSO API
         """
         snmpConfigURL = 'running/snmp'
-        apiRequest = Wrapper_API()
-        apiResponse = apiRequest.send_api_request(snmpConfigURL)
-        return apiResponse
 
-    def createVPN(self):
-        data = '''
-            {
-              "l3vpn:l3vpn": {
-                "name": "%(vpnName)s",
-                "route-distinguisher": %(routeDistinguisher)s,
-                "endpoint": [
-                  {
-                    "id": "%(sourceID)s",
-                    "ce-device": "%(sourceCeDevice)s",
-                    "ce-interface": "%(sourceCeInterface)s",
-                    "ip-network": "%(sourceNetwork)s",
-                    "bandwidth": %(sourceBandwidth)s,
-                    "as-number": %(sourceAsNumber)s
-                  },
-                  {
-                    "id": "%(destinationID)s",
-                    "ce-device": "%(destinationCeDevice)s",
-                    "ce-interface": "%(destinationCeInterface)s",
-                    "ip-network": "%(destinationNetwork)s",
-                    "bandwidth": %(destinationBandwidth)s,
-                    "as-number": %(destinationAsNumber)s
-                  }
-                ]
-              }
-            }
-        ''' % {'vpnName': input("VPN Name: "),
-               'routeDistinguisher': int(input("Route Distinguiser: ")),
-               'sourceID': input("ID: "),
-               'sourceCeDevice': input("CE Device: "),
-               'sourceCeInterface': input("CE Interface: "),
-               'sourceNetwork': input("Network Address: "),
-               'sourceBandwidth': int(input("Bandwidth: ")),
-               'sourceAsNumber': int(input("AS Number: ")),
-               'destinationID': input("ID: "),
-               'destinationCeDevice': input("CE Device: "),
-               'destinationCeInterface': input("CE Interface: "),
-               'destinationNetwork': input("Network Address: "),
-               'destinationBandwidth': int(input("Bandwidth: ")),
-               'destinationAsNumber': int(input("AS Number: "))
-               }
+        url = 'http://' + self.host + '/api' + '/' + snmpConfigURL
 
-        data_formatted = json.loads(data, object_pairs_hook=OrderedDict)
+        response = requests.get(url, auth=(self.username, self.password),
+                                headers=self.headers, verify=False)
+        return response
 
-        with open('createVPN.json', 'w') as outfile:
-            json.dump(data_formatted, outfile, indent=2)
+    def createVPN(self, outfile):
+        vpnData = json.dumps(outfile)
+        vpnURL = 'running/vpn'
+        url = 'http://' + self.host + '/api' + '/' + vpnURL
 
-        payload = open('createVPN.json', 'rb').read()
-        response = requests.request("POST", url, data=payload, headers=headers, auth=(user, password))
+        response = requests.request("POST", url, data=vpnData, headers=self.headers, auth=(self.username, self.password))
 
-        print()
         print(response.text)
-        print("VPN Created")

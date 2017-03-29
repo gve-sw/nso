@@ -25,7 +25,8 @@
 #           For internal Cisco gve-programmability@cisco.com
 #           For Cisco partners, open a case at www.cisco.com/go/ph
 
-import requests, json
+import requests
+import json
 
 class Wrapper_API(object):
     """
@@ -35,60 +36,49 @@ class Wrapper_API(object):
         self.host = host
         self.username = username
         self.password = password
-
-    def send_api_request(self, phrase):
-        """
-        Sends a request to the API for retrieving data.
-        """
-        url = 'http://' + host + '/api' + '/' + phrase
-        headers = {'Content-Type': 'application/vnd.yang.data+json',
-                   'Accept': 'application/vnd.yang.data+json'}
-        response = requests.get(url, auth=(username, password),
-                                headers=headers, verify=False)
-        return response.text
+        self.headers = {'Content-Type': 'application/vnd.yang.data+json',
+                        'Accept': 'application/vnd.yang.data+json'}
 
     def getDevices(self):
         """
         Retrieves a list of devices from the NSO API
         """
         devicesURL = 'running/devices'
-        apiRequest = Wrapper_API()
-        apiResponse = apiRequest.send_api_request(devicesURL)
-        return apiResponse
+        url = 'http://' + self.host + '/api' + '/' + devicesURL
+
+        response = requests.get(url, auth=(self.username, self.password),
+                                headers=self.headers, verify=False)
+        return response
 
     def getTopology(self):
         """
         Retrieves a list of devices and their relationships in a topology from the NSO API
         """
         TopologyURL = 'running/topology'
-        apiRequest = Wrapper_API()
-        apiResponse = apiRequest.send_api_request(TopologyURL)
-        return apiResponse
+
+        url = 'http://' + self.host + '/api' + '/' + TopologyURL
+
+        response = requests.get(url, auth=(self.username, self.password),
+                                headers=self.headers, verify=False)
+        return response
 
     def getSnmpConfig(self):
         """
         Retrieves SNMP config from the NSO API
         """
         snmpConfigURL = 'running/snmp'
-        apiRequest = Wrapper_API()
-        apiResponse = apiRequest.send_api_request(snmpConfigURL)
-        return apiResponse
+
+        url = 'http://' + self.host + '/api' + '/' + snmpConfigURL
+
+        response = requests.get(url, auth=(self.username, self.password),
+                                headers=self.headers, verify=False)
+        return response
 
     def createVPN(self, outfile):
-        val = json.dumps(outfile)
-        #vpnURL = running/vpn
-        #apiRequest = Wrapper_API()
-        #apiResponse = apiRequest.send_api_request(vpnURL)
-        user = "admin"
-        password = "admin"
-        host = '198.18.134.28:8080'
+        vpnData = json.dumps(outfile)
+        vpnURL = 'running/vpn'
+        url = 'http://' + self.host + '/api' + '/' + vpnURL
 
-        url = 'http://' + host + '/api' + '/running/vpn'
-        headers = {'Content-Type': 'application/vnd.yang.data+json',
-                   'Accept': 'application/vnd.yang.data+json'}
+        response = requests.request("POST", url, data=vpnData, headers=self.headers, auth=(self.username, self.password))
 
-        response = requests.request("POST", url, data=val, headers=headers, auth=(user, password))
-        print('Printing inside Wrapper_API.py...')
-        #print(val)
         print(response.text)
-        print("VPN Created")

@@ -26,7 +26,8 @@ def main():
     print()
 
     api = Wrapper_API(host, username, password)
-    vpn = api.createVPN()
+    #Not working anymore because we changed our create VPN function.
+    api.createVPN()
 
 
 if __name__ == "__main__":
