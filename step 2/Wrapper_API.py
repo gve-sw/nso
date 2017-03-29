@@ -25,7 +25,7 @@
 #           For internal Cisco gve-programmability@cisco.com
 #           For Cisco partners, open a case at www.cisco.com/go/ph
 
-import requests
+import requests, json
 
 host = '198.18.134.28:8080'
 username = 'admin'

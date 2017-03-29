@@ -25,7 +25,7 @@
 #           For internal Cisco gve-programmability@cisco.com
 #           For Cisco partners, open a case at www.cisco.com/go/ph
 
-import requests
+import requests, json
 
 class Wrapper_API(object):
     """
@@ -74,10 +74,21 @@ class Wrapper_API(object):
         apiResponse = apiRequest.send_api_request(snmpConfigURL)
         return apiResponse
 
-    def createVPN(self, json):
-        #response = requests.request("POST", url, data=json, headers=headers, auth=(user, password))
+    def createVPN(self, outfile):
+        val = json.dumps(outfile)
+        #vpnURL = running/vpn
+        #apiRequest = Wrapper_API()
+        #apiResponse = apiRequest.send_api_request(vpnURL)
+        user = "admin"
+        password = "admin"
+        host = '198.18.134.28:8080'
 
+        url = 'http://' + host + '/api' + '/running/vpn'
+        headers = {'Content-Type': 'application/vnd.yang.data+json',
+                   'Accept': 'application/vnd.yang.data+json'}
+
+        response = requests.request("POST", url, data=val, headers=headers, auth=(user, password))
         print('Printing inside Wrapper_API.py...')
-        print(json)
-        #print(response.text)
+        #print(val)
+        print(response.text)
         print("VPN Created")
