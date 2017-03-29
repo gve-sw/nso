@@ -75,10 +75,24 @@ class Wrapper_API(object):
         return response
 
     def createVPN(self, outfile):
+        """
+        Creates a VPN through the NSO API
+        """
         vpnData = json.dumps(outfile)
         vpnURL = 'running/vpn'
         url = 'http://' + self.host + '/api' + '/' + vpnURL
 
-        response = requests.request("POST", url, data=vpnData, headers=self.headers, auth=(self.username, self.password))
+        response = requests.request("POST", url, data=vpnData, headers=self.headers, auth=(self.username, self.password), verify=False)
 
         print(response.text)
+
+    def deleteVPN(self):
+        """
+        Deletes the specified VPN through the NSO API
+        """
+        deleteVPN = input("** WARNING DELETES VPN ** VPN Name to Delete: "),
+        url = 'http://' + self.host + '/api' + '/' + deleteVPN
+
+        response = requests.request("DELETE", url, headers=self.headers, auth=(self.username, self.password), verify=False)
+
+        print (response.text)
