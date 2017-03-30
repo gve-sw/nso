@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L3 VPN Deletion</title>
+</head>
+<body>
+<h1>CSAP Telecom L3 VPN Deletion Tool</h1>
+
+<img src="../static/assets/img/topology.png" alt="Network Topology" align="right" style="width:900px;height:500px;">
+
+<style>
+    { margin: 0; padding: 0; }
+
+    html {
+        background: url("../static/assets/img/home.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+
+<br>
+<form action="/deleteVPN" method="post">
+
+    *** WARNING: This will delete your created VPN ***
+
+   Delete VPN Name:
+  <input type="text" name="vpnDelete">
+    <br>
+    <br>
+
+
+</form>
+</body>
+</html>
