@@ -20,8 +20,8 @@ def L3VpnDeploy():
     return render_template('L3VpnDeploy.html')
 
 @app.route("/deleteVPN")
-def L3VpnDeploy():
-    return render_template('deleteVPN')
+def deleteVPN():
+    return render_template('deleteVPN.html')
 
 @app.route('/L3VpnDeploy', methods = ['POST'])
 def createJSON():
