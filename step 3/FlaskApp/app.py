@@ -23,7 +23,15 @@ def L3VpnDeploy():
 def deleteVPN():
     return render_template('deleteVPN.html')
 
-@app.route('/L3VpnDeploy', methods = ['POST'])
+@app.route("/deleteVPN", methods= ['POST'])
+def removeVPN():
+    name = request.form['vpnDelete']
+    print (name)
+    apiRequest = Wrapper_API(host, username, password)
+    apiRequest.deleteVPN(name)
+    return redirect('/')
+
+@app.route("/L3VpnDeploy", methods = ['POST'])
 def createJSON():
     data = '''
         {
