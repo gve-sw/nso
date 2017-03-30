@@ -90,9 +90,9 @@ class Wrapper_API(object):
         """
         Deletes the specified VPN through the NSO API
         """
-        #deleteVPN = input("** WARNING DELETES VPN ** VPN Name to Delete: "),
+
         url = 'http://' + self.host + '/api/running/vpn/l3vpn' + '/' + name
-        print(url)
+
         response = requests.request("DELETE", url, headers=self.headers, auth=(self.username, self.password), verify=False)
 
         print (response.text)
