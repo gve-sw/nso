@@ -23,6 +23,14 @@ def L3VpnDeploy():
 def deleteVPN():
     return render_template('deleteVPN.html')
 
+@app.route("/devices")
+def devices():
+    return render_template('devices.html')
+
+@app.route("/topology")
+def topology():
+    return render_template('topology.html')
+
 @app.route("/deleteVPN", methods= ['POST'])
 def removeVPN():
     name = request.form['vpnDelete']
