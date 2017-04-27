@@ -1,4 +1,11 @@
-# Retrieves a list of the devices in the topology and their links configured in NSO.
+"""
+NSO API
+
+Author: Joel Fernandez, Ajay Doshi
+Date: 30 March 2017
+
+Retrieves a list of the devices in the topology and their links configured in NSO.
+"""
 
 import requests
 

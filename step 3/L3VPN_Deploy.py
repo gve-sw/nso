@@ -1,3 +1,12 @@
+"""
+NSO API
+
+Author: Joel Fernandez, Ajay Doshi
+Date: 30 March 2017
+
+Accepts L3VPN arguments from user input, converts to JSON and sends request to NSO API
+"""
+
 import json
 from collections import OrderedDict
 from Wrapper_API import Wrapper_API
@@ -25,6 +34,9 @@ def main():
     print()
     print("This tool uses the nourthbound NSO API to deploy L3VPNs")
     print()
+
+    # The initialization of the 'data' field forces our JSON file to adhere to the strict format that we have set below,
+    # so that it is accepted by the NSO API
 
     data = '''
         {
@@ -67,14 +79,19 @@ def main():
            'destinationAsNumber': int(input("AS Number: "))
            }
 
+    # Convert the 'data' string to a JSON object, we use OrderedDict to maintain the exact sequence of the fields as
+    # it was initialized above
     data_formatted = json.loads(data, object_pairs_hook=OrderedDict)
 
+    # Debugging purpose, to view the actual JSON file that would be sent to the API
     with open('createVPN.json', 'w') as outfile:
         json.dump(data_formatted, outfile, indent=2)
 
+    # Send the JSON file as the payload for our request
     payload = open('createVPN.json', 'rb').read()
 
     apiRequest = Wrapper_API(host, username, password)
+    # Use the createVPN() function in our Wrapper_API
     apiRequest.createVPN(payload)
 
     print()

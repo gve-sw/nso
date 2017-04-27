@@ -1,3 +1,12 @@
+"""
+NSO API
+
+Authors: Joel Fernandez, Ajay Doshi
+Date: 30 March 2017
+
+Renders HTML pages and passes variables between the HTML pages and Wrapper_API
+"""
+
 from flask import Flask, render_template, request, redirect
 from collections import OrderedDict
 from Wrapper_API import Wrapper_API
@@ -41,6 +50,9 @@ def removeVPN():
 
 @app.route("/L3VpnDeploy", methods = ['POST'])
 def createJSON():
+    """
+    We initialize the data field to set the format of the JSON file which would be sent to the NSO API
+    """
     data = '''
         {
           "l3vpn:l3vpn": {
@@ -81,7 +93,12 @@ def createJSON():
            'destinationBandwidth': request.form['Destination_Bandwidth'],
            'destinationAsNumber': request.form['Destination_AS_Number']
            }
+    # Above, we can see that request.form is actually referring to the field values in the HTML page. These values are
+    # extracted out and stored into the 'data' string
 
+    # The use of OrderedDict ensures that the exact order of the 'data' string in preserved when we create the
+    # 'data_formatted' JSON variable. Omitting the object pair hook will result in a different sequence of columns in
+    # the JSON file, which will not be accepted by the NSO API
     data_formatted = json.loads(data, object_pairs_hook=OrderedDict)
     apiRequest = Wrapper_API(host, username, password)
     apiRequest.createVPN(data_formatted)

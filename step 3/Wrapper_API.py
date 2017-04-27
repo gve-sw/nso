@@ -82,7 +82,8 @@ class Wrapper_API(object):
         vpnURL = 'running/vpn'
         url = 'http://' + self.host + '/api' + '/' + vpnURL
 
-        response = requests.request("POST", url, data=vpnData, headers=self.headers, auth=(self.username, self.password), verify=False)
+        response = requests.request("POST", url, data=vpnData, headers=self.headers,
+                                    auth=(self.username, self.password),verify=False)
 
         print(response.text)
 
@@ -93,6 +94,7 @@ class Wrapper_API(object):
 
         url = 'http://' + self.host + '/api/running/vpn/l3vpn' + '/' + name
 
-        response = requests.request("DELETE", url, headers=self.headers, auth=(self.username, self.password), verify=False)
+        response = requests.request("DELETE", url, headers=self.headers,
+                                    auth=(self.username, self.password), verify=False)
 
         print (response.text)

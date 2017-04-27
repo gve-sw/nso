@@ -1,4 +1,11 @@
-# Script creates a VPN for a customer called Telstra. Data is taken from a seperate JSON file
+"""
+NSO API
+
+Author: Joel Fernandez, Ajay Doshi
+Date: 30 March 2017
+
+Script creates a VPN for a customer called Telstra. Data is taken from a seperate JSON file
+"""
 
 import requests
 

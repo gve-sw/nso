@@ -1,3 +1,12 @@
+"""
+NSO API
+
+Author: Joel Fernandez, Ajay Doshi
+Date: 30 March 2017
+
+Accepts L3VPN arguments from user input, converts to JSON and sends request to NSO API
+"""
+
 import json
 import requests
 from collections import OrderedDict

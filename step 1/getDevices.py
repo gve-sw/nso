@@ -1,4 +1,11 @@
-# Script receives a list of devices currently configured under NSO.
+"""
+NSO API
+
+Author: Joel Fernandez, Ajay Doshi
+Date: 30 March 2017
+
+This script receives a list of devices currently configured under NSO.
+"""
 
 import requests
 

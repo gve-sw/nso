@@ -1,4 +1,11 @@
-# Script deletes the previously created VPN for the customer called Telstra.
+"""
+NSO API
+
+Author: Joel Fernandez, Ajay Doshi
+Date: 30 March 2017
+
+Script deletes a previously created VPN for the customer called Telstra.
+"""
 
 import requests
 
