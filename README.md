@@ -35,4 +35,4 @@ You will find the corresponding folders for each step.
 
 
 ### Sample Application - MPLS Service Provisioning with NSO Northbound APIs
-This project uses NSO northbound APIs to provision MPLS L2VPN and L3VPN.
+This project uses NSO northbound APIs to provision MPLS L3VPN.
